@@ -1,0 +1,44 @@
+Create database Curso
+default character set utf8
+default collate utf8_general_ci;
+
+create table disciplina (
+id int not null auto_increment primary key,
+nome varchar(45) not null,
+descricao varchar(45),
+carga_horaria varchar(5),
+ano year
+) default charset = utf8;
+
+insert into disciplina
+(nome, descricao, carga_horaria, ano)
+values
+('Python', 'Linguagem de programação','70H', '2022'),
+('MySQL', 'Banco de Dados','70H', '2022'),
+('Algoritmo','Linguagem de programação','70H', '2022');
+
+select * from disciplina;
+
+create table alunos (
+id int not null auto_increment primary key,
+nome varchar(30) not null,
+nascimento date,
+sexo enum('M','F'),
+profissao varchar(30),
+disciplina_id int,
+nacionalidade varchar(30) default 'Brasil',
+constraint alunos_disciplina foreign key(disciplina_id) references disciplina (id)
+) default charset = utf8;
+
+insert into alunos
+(nome, nascimento, sexo, profissao, nacionalidade)
+values
+('Mateus Faria', '1996-08-19', 'M', 'Desenvolvedor', default),
+('Lorraine Silva', '1995-02-06', 'F', 'Web Design', 'Argentina'),
+('Maria da Penha', '1965-07-30', 'F', 'Analista de Ti', 'Australia');
+
+update alunos set disciplina_id = '2' where id = '1';
+update alunos set disciplina_id = '1' where id = '2';
+update alunos set disciplina_id = '3' where id = '3';
+
+select * from alunos;
